@@ -5,24 +5,25 @@ Make plots of ERA5 surface conditions at Papa, WHOTS, NTAS, Stratus
 Created on Fri Jan 22 19:38:04 2021
 
 @author: jtomfarrar
+jfarrar@whoi.edu
 """
 import os
 # I need this to make basemap work
 os.environ['PROJ_LIB'] = r'C:\Users\jtomf\anaconda3\pkgs\cartopy-0.18.0-py38h2a8b5ed_8\Lib\site-packages\cartopy'
 from mpl_toolkits.basemap import Basemap
 import numpy as np
-from netCDF4 import Dataset
-from netCDF4 import num2date
+# from netCDF4 import Dataset
+# from netCDF4 import num2date
 #import netCDF4 as nc
 import matplotlib.pyplot as plt
 import matplotlib as mplt
-from scipy import signal
-import datetime
+# from scipy import signal
+# import datetime
 import nc_time_axis
 import xarray as xr
 import glob
 
-site_name = 'Stratus' #can be 'NTAS', 'WHOTS', 'Stratus', or 'Papa'
+site_name = 'WHOTS' #can be 'NTAS', 'WHOTS', 'Stratus', or 'Papa'
 
 if site_name=='WHOTS':
     lon_pt = -158 # WHOTS=-158
@@ -37,7 +38,6 @@ elif site_name=='Stratus':
     lon_pt = -85  # Stratus 2_pt°S, 85°W
     lat_pt = -20  # 
 
-plt.close("all")
 __figdir__ = './figs/' + site_name
 savefig_args = {'bbox_inches':'tight', 'pad_inches':0}
 
@@ -83,10 +83,10 @@ ffyW = np.squeeze(ffyW)
 swh0 = ERA.swh[:,ffyW,ffxW]
 
 
-plt.close('all')
+#plt.close('all')
 #############################
 # Met plot time serires
-fig = plt.figure(figsize=(6,4))
+fig = plt.figure(figsize=(8,6))
 plt.subplot(5,1,1)
 plt.plot(time,sst0)
 plt.ylabel('SST ($^\circ$C)')
@@ -109,6 +109,8 @@ ax.set_xticklabels([])
 plt.subplot(5,1,4)
 plt.plot(time,np.sqrt(u0**2+v0**2))
 plt.ylabel('Wind speed (m/s)')
+ax = plt.gca()
+ax.set_xticklabels([])
 
 plt.subplot(5,1,5)
 plt.plot(time,u0)
