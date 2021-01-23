@@ -23,7 +23,7 @@ import nc_time_axis
 import xarray as xr
 import glob
 
-site_name = 'WHOTS' #can be 'NTAS', 'WHOTS', 'Stratus', or 'Papa'
+site_name = 'Papa' #can be 'NTAS', 'WHOTS', 'Stratus', or 'Papa'
 
 if site_name=='WHOTS':
     lon_pt = -158 # WHOTS=-158
@@ -83,7 +83,7 @@ ffyW = np.squeeze(ffyW)
 swh0 = ERA.swh[:,ffyW,ffxW]
 
 
-#plt.close('all')
+plt.close('all')
 #############################
 # Met plot time serires
 fig = plt.figure(figsize=(8,6))
