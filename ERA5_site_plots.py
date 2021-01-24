@@ -12,18 +12,13 @@ import os
 os.environ['PROJ_LIB'] = r'C:\Users\jtomf\anaconda3\pkgs\cartopy-0.18.0-py38h2a8b5ed_8\Lib\site-packages\cartopy'
 from mpl_toolkits.basemap import Basemap
 import numpy as np
-# from netCDF4 import Dataset
-# from netCDF4 import num2date
-#import netCDF4 as nc
 import matplotlib.pyplot as plt
 import matplotlib as mplt
-# from scipy import signal
-# import datetime
 import nc_time_axis
 import xarray as xr
 import glob
 
-site_name = 'Papa' #can be 'NTAS', 'WHOTS', 'Stratus', or 'Papa'
+site_name = 'NTAS' #can be 'NTAS', 'WHOTS', 'Stratus', or 'Papa'
 
 if site_name=='WHOTS':
     lon_pt = -158 # WHOTS=-158
@@ -120,11 +115,11 @@ plt.savefig(__figdir__+'_Met_summary',**savefig_args)
 
 #############################
 # Site map
-lcc_params={'projection':'lcc', 'lat_1':20.,'lat_2':30,'lat_0':lat_pt,'lon_0':lon_pt,'width':10*10**6,'height':10*10**6, 'resolution':'h'}
-ortho_params = {'projection':'ortho','lat_0':35,'lon_0':lon_pt,'resolution':'l'}
+lcc_params={'projection':'lcc', 'lat_1':lat_pt-5,'lat_2':lat_pt+5,'lat_0':lat_pt,'lon_0':lon_pt,'width':10*10**6,'height':10*10**6, 'resolution':'h'}
+ortho_params = {'projection':'ortho','lat_0':lat_pt,'lon_0':lon_pt,'resolution':'l'}
 dx=5
 dy=5
-cyl_params={'projection':'cyl', 'lat_1':20.,'lat_2':30,'lat_0':lat_pt,'lon_0':lon_pt,'llcrnrlat':lat_pt-dy,'urcrnrlat':lat_pt+dy,'llcrnrlon':lon_pt-dx,'urcrnrlon':lon_pt+dx, 'resolution':'h'}
+cyl_params={'projection':'cyl', 'lat_1':lat_pt-5,'lat_2':lat_pt+5,'lat_0':lat_pt,'lon_0':lon_pt,'llcrnrlat':lat_pt-dy,'urcrnrlat':lat_pt+dy,'llcrnrlon':lon_pt-dx,'urcrnrlon':lon_pt+dx, 'resolution':'h'}
 
 fig = plt.figure(figsize=(12,5))
 map = Basemap(**lcc_params)
