@@ -18,7 +18,7 @@ import nc_time_axis
 import xarray as xr
 import glob
 
-site_name = 'NTAS' #can be 'NTAS', 'WHOTS', 'Stratus', or 'Papa'
+site_name = 'WHOTS' #can be 'NTAS', 'WHOTS', 'Stratus', or 'Papa'
 
 if site_name=='WHOTS':
     lon_pt = -158 # WHOTS=-158
@@ -84,33 +84,38 @@ plt.close('all')
 fig = plt.figure(figsize=(8,6))
 plt.subplot(5,1,1)
 plt.plot(time,sst0)
-plt.ylabel('SST ($^\circ$C)')
+plt.ylabel('[$^\circ$C]')
 plt.title('Met summary at ' +site_name + ' ('+ str(round(float(lat[ffy]),4)) + '$^\circ$N, ' + str(round(float(lon[ffx]),4)) + '$^\circ$E)')
+plt.legend(['SST'])
 ax = plt.gca()
 ax.set_xticklabels([])
 
 plt.subplot(5,1,2)
 plt.plot(time,swh0)
-plt.ylabel('SWH (m)')
+plt.legend(['Signif. Wave Height'])
+plt.ylabel('[m]')
 ax = plt.gca()
 ax.set_xticklabels([])
 
 plt.subplot(5,1,3)
 plt.plot(time,atmp0)
-plt.ylabel('Air temp ($^\circ$C)')
+plt.legend(['Air temp'])
+plt.ylabel('[$^\circ$C]')
 ax = plt.gca()
 ax.set_xticklabels([])
 
 plt.subplot(5,1,4)
 plt.plot(time,np.sqrt(u0**2+v0**2))
-plt.ylabel('Wind speed (m/s)')
+plt.legend(['Wind speed'])
+plt.ylabel('[m/s]')
 ax = plt.gca()
 ax.set_xticklabels([])
 
 plt.subplot(5,1,5)
 plt.plot(time,u0)
 plt.plot(time,v0)
-plt.ylabel('U, V (m/s)')
+plt.legend(['Zonal wind','Meridional wind'])
+plt.ylabel('[m/s]')
 plt.savefig(__figdir__+'_Met_summary',**savefig_args)
 
 #############################
